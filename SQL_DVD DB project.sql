@@ -36,7 +36,8 @@ ORDER BY rental_count ASC;
 
 -- 4. To find out the most popular film category with the respective total revenues
 
-SELECT c.name, SUM(p.amount) AS total_revenue, COUNT(p.payment_id) AS rental_count
+SELECT c.name, SUM(p.amount) AS total_revenue, COUNT(p.payment_id) AS rental_count,
+RANK()OVER(ORDER BY COUNT(p.payment_id)DESC) AS rank
 FROM payment p
 JOIN rental r ON p.rental_id=r.rental_id
 JOIN inventory i ON r.inventory_id=i.inventory_id
@@ -143,5 +144,34 @@ SELECT movie_title, COUNT (full_name) AS no_of_char, STRING_AGG(full_name, ', ')
 FROM movie_char
 GROUP BY movie_title
 ORDER BY movie_title ASC;
+
+
+
+
+-- 11. To list the average revenue, cumulative revenue of each film over each rental with the use of window function
+
+SELECT f.film_id, f.title, r.rental_date, p.amount,
+AVG(p.amount) OVER my_window AS avg_revenue,
+SUM(p.amount) OVER my_window AS cumulative_revenue
+FROM film f
+JOIN inventory i ON f.film_id=i.film_id
+JOIN rental r ON i.inventory_id=r.inventory_id
+JOIN payment p ON r.rental_id=p.rental_id
+WINDOW
+my_window AS (PARTITION BY f.film_id ORDER BY r.rental_date)
+ORDER BY f.film_id, r.rental_date
+
+
+
+
+
+-- 12. To look at the rental pattern of each customer with the use of LAG function
+
+SELECT customer_id, rental_date, 
+LAG (rental_date) OVER (PARTITION BY customer_id ORDER BY rental_date) AS previous_rental_date,
+rental_date - LAG (rental_date) OVER (PARTITION BY customer_id ORDER BY rental_date) AS rental_duration
+FROM rental
+ORDER BY customer_id, rental_date;
+
 
 
