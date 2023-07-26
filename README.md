@@ -3,7 +3,7 @@
 This is an analysis project on the open-source DVD rental database with the use of PostgreSQL. 
 The objectives of this project are extracting and analysing data from the object-relational database with SQL querying skills.
 
-The [LINK] of the database (https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+The [LINK](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) of the database.
 
 
 Following works have been done with tables showing meaningful result created,
