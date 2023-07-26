@@ -1,6 +1,12 @@
 # SQL DVD Rental DB project
  
-This is an analysis project on DVD rental database with the use of SQL. Following works have been done with several tables created,
+This is an analysis project on the open-source DVD rental database with the use of PostgreSQL. 
+The objectives of this project are extracting and analysing data from the object-relational database with SQL querying skills.
+
+The [LINK] of the database (https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+
+
+Following works have been done with tables showing meaningful result created,
 
 1. To count the number of films that each character played
 2. To match the category of each film that each character played
